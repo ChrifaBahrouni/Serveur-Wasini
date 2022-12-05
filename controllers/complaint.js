@@ -8,12 +8,14 @@ const Notification = require('../models/notification');
 
 
    module.exports.create = async (req, res) =>{
-  //ça pour créer un  compalint dans la base
+  //ça pour créer un  réclamations dans la base
     const newComplaint = new complaintModel({
-      //status: req.body.status,
-      title : req.body.title , 
+     
+      _id_user: req.body._id_user , 
+      _id_voyageur: req.body._id_voyageur , 
+      _id_post: req.body._id_post , 
       message : req.body.message , 
-      body : req.body.body , 
+    
      
     });
     //pour ajouter une notification d'un nouveau événement 

@@ -19,13 +19,20 @@ const UserSchema = new Schema({
        required: true
     },
     photo: {
-        data: Buffer,
-        contentType: String
+        type:  String ,
+        default : ""  , 
+        require: true 
+        
     },
     created: {
         type: Date,
         default: Date.now
     },
+    __t:{
+        type : String , 
+        require : true , 
+        default :"User"
+    }
   
 });
 

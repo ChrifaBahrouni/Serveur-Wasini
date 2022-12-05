@@ -5,7 +5,7 @@ const router = express.Router();
 const Voyageurcontroller=require ('../../controllers/voyageur');
 
 
-router.post("/post-add", Voyageurcontroller.createPost);
-router.get('/voyageur-data',Voyageurcontroller.readPost);//route for login event
-router.get("/count-voyageur", Voyageurcontroller.countPost);//count numbre post
+router.post("/create_voyageur", Voyageurcontroller.create);
+router.get('/voyageur-data',Voyageurcontroller.read);//route for get all voyageurs
+router.post('/voyageur-delete',Voyageurcontroller.deleteUser);//route for delete voyageur 
 module.exports = router;

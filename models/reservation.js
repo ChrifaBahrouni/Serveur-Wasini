@@ -3,18 +3,23 @@ const { ObjectId } = mongoose.Schema;
 
 const ReservationSchema = new mongoose.Schema({
    
-    Publication_Id: {
+    _id_post: {
         type: ObjectId,
         ref: "Post"
     },
   
-    reserveBy : { 
+    _id_voyageur : { 
         type : ObjectId , 
         ref :'Voyageur'
+    },
+    _id_user : { 
+        type : ObjectId , 
+        ref :'User'
     },
     valide_reservation: {
         type: Boolean,
         default: false
+        
     },
     valide_livraison: {
         type: Boolean,

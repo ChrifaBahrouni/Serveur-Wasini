@@ -14,7 +14,7 @@ const users = require('./routes/api/users');
 const admins = require('./routes/api/admins');
 
 const posts = require('./routes/api/posts');
-
+const voyageur = require('./routes/api/voyageur');
 const chats = require('./routes/api/chat');
 const complaints = require('./routes/api/complaint'); 
 const notifications = require('./routes/api/notification');
@@ -60,13 +60,62 @@ mongoose.connect('mongodb://127.0.0.1:27017/personnel_Shoppers'
 app.use(passport.initialize());
 //routes
 app.use('/api/users', users);
+app.use('/api/voyageurs', voyageur);
 app.use('/api/complaints', complaints);
 app.use('/api/admins', admins);
 app.use('/api/posts', posts);
 app.use('/api/chats', chats);
 app.use('/api/notifications', notifications);
-app.use('/api/réservations', reservation);
+app.use('/api/reservations', reservation);
 app.use('/static', express.static('public'));
+var Publishable_Key = 'Your_Publishable_Key'
+var Secret_Key = 'Your_Secret_Key'
+ 
+const stripe = require('stripe')(Secret_Key)
+
+// View Engine Setup
+app.set('views', path.join(__dirname, 'views'))
+app.set('view engine', 'ejs')
+ 
+app.get('/', function(req, res){
+    res.render('Home', {
+       key: Publishable_Key
+    })
+})
+
+app.post('/payment', function(req, res){
+ 
+    // Moreover you can take more details from user
+    // like Address, Name, etc from form
+    stripe.customers.create({
+        email: req.body.stripeEmail,
+        source: req.body.stripeToken,
+        name: 'Gourav Hammad',
+        address: {
+            line1: 'TC 9/4 Old MES colony',
+            postal_code: '452331',
+            city: 'Indore',
+            state: 'Madhya Pradesh',
+            country: 'India',
+        }
+    })
+    .then((customer) => {
+ 
+        return stripe.charges.create({
+            amount: 2500,     // Charging Rs 25
+            description: 'Web Development Product',
+            currency: 'INR',
+            customer: customer.id
+        });
+    })
+    .then((charge) => {
+        res.send("Success")  // If no error occurs
+    })
+    .catch((err) => {
+        res.send(err)       // If some error occurs
+    });
+})
+ 
 //server
 //const port = process.env.PORT || 3000;
 const port = 5000 ; 

@@ -59,7 +59,7 @@ module.exports.photo = async (req, res) => {
       module.exports.deletePost = async (req, res) =>{
         postModel.deleteOne({ _id: req.body._id}).then(user => {
               if (postModel) {
-                  return res.status(200).json({message: 'post deleted successfully. Refreshing data...', success: true})
+                  return res.status(200).json({message: 'Post  deleted successfully. Refreshing data...', success: true})
               }
           });
       };    

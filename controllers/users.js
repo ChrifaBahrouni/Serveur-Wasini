@@ -25,7 +25,8 @@ const User = require('../models/User');
                 //FullName: req.body.FullName,
                 Email: req.body.email,
                 Password: req.body.password,
-                PhoneNumber: req.body.PhoneNumber
+                PhoneNumber: req.body.PhoneNumber, 
+                photo: req.body.photo  
             });
             //pour ajouter une notification d'un nouveau événement 
     const newNotifications = new Notification ({
@@ -52,7 +53,7 @@ const User = require('../models/User');
 //pour lister users
 //router.post('/user-data', (req, res) => {
     module.exports.readUser = async (req, res) =>{
-    User.find({}).select(['-password']).then(user => {
+    User.find({__t:'User'}).select(['-password']).then(user => {
         if (user) {
             return res.status(200).send(user);
         }

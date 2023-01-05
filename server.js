@@ -68,8 +68,8 @@ app.use('/api/chats', chats);
 app.use('/api/notifications', notifications);
 app.use('/api/reservations', reservation);
 app.use('/static', express.static('public'));
-var Publishable_Key = 'Your_Publishable_Key'
-var Secret_Key = 'Your_Secret_Key'
+var Publishable_Key = 'pk_test_51MBPevKNrVArcxobRF1wtNwVlInrbDSBTnDTBnrj5f6QslHHwYoYoLgO7CoHhFSdWxxFdh6EIIiJICGf9WcNbcqF00uYK1uoAK'
+var Secret_Key = 'sk_test_51MBPevKNrVArcxobIs9Bi2a3VOj4FK18ZRs4wDO0FrEjR2S9CM3GwR7JgnH71gVgLpDFmDLtLWZm1ooe9jZpEJwM00XdSqzGug'; 
  
 const stripe = require('stripe')(Secret_Key)
 
@@ -112,9 +112,22 @@ app.post('/payment', function(req, res){
         res.send("Success")  // If no error occurs
     })
     .catch((err) => {
+        
         res.send(err)       // If some error occurs
     });
 })
+//get all transactions stripe 
+
+// app.get('/allpayment', async function(req, res){
+//     const transactions = await stripe.issuing.transactions.list({
+//         limit: 3,
+//       });
+//        console.log(" all transactions " ,transactions )
+// })
+
+// auto payement entre  adminstrateur et voyageur si une annonce est valide sa livraison 
+// par le client une  transactions effectue automatique   cote admin  vers  compte  
+
  
 //server
 //const port = process.env.PORT || 3000;
